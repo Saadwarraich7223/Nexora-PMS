@@ -1,0 +1,83 @@
+# ===========================
+# DEPENDENCIES
+# ===========================
+node_modules/
+backend/node_modules/
+frontend/node_modules/
+
+# ===========================
+# BUILD OUTPUTS
+# ===========================
+dist/
+dist-ssr/
+frontend/dist/
+backend/coverage/
+
+# ===========================
+# ENVIRONMENT FILES
+# ===========================
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# ===========================
+# LOGS
+# ===========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+backend/audit-log*.txt
+backend/diagnostic_output.txt
+backend/error_log.txt
+frontend/build_output.txt
+
+# ===========================
+# PROJECT CONTEXT / AI PLAN FILES
+# ===========================
+CONTEXT.md
+IMPLEMENTATION_PLAN.md
+plan.md
+detailed analysis report.md
+backend/TESTS_CONTEXT.md
+
+# ===========================
+# TEMP & UPLOAD DIRECTORIES
+# ===========================
+backend/tmp/
+backend/src/uploads/temp/
+
+# ===========================
+# OS FILES
+# ===========================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ===========================
+# EDITOR DIRECTORIES
+# ===========================
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ===========================
+# MISC DEVELOPMENT ARTIFACTS
+# ===========================
+*.local
+backend/test-db.js
+backend/downLoadMongo.js
+backend/replace-logs.js
+backend/init-grading-templates.js
+backend/seed-rubric.js
+frontend/sanitize.py

@@ -1,0 +1,45 @@
+{
+  "name": "pms-backend",
+  "version": "1.0.0",
+  "description": "Final Year Project Management System (FYPMS) backend",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js",
+    "test:unit": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js tests/unit",
+    "test:integration": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js tests/integration",
+    "test:e2e": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js tests/e2e",
+    "coverage": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --coverage",
+    "lint": "echo \"lint not configured\""
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "csv-parser": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.4.0",
+    "groq-sdk": "^1.1.2",
+    "helmet": "^7.1.0",
+    "joi": "^17.12.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.4",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^6.9.14",
+    "postinstall": "^0.11.2",
+    "socket.io": "^4.7.5",
+    "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "mongodb-memory-server": "^11.0.1",
+    "nodemon": "^3.1.4",
+    "supertest": "^6.3.4"
+  }
+}
