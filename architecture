@@ -1,0 +1,34 @@
+digraph Architecture {
+	rankdir=LR size="8,5"
+	subgraph cluster_0 {
+		color=blue label="Frontend (React SPA)"
+		UI [label="User Interface
+(Tailwind CSS)"]
+		Redux [label="State Management
+(Redux Toolkit)"]
+		SocketC [label="Socket.IO Client"]
+	}
+	subgraph cluster_1 {
+		color=green label="Backend (Node.js/Express)"
+		API [label="REST API Layer"]
+		Logic [label="Service Layer
+(Business Logic)"]
+		SocketS [label="Socket.IO Server"]
+		AI [label="AI Engine
+(Llama 3.1)"]
+	}
+	subgraph cluster_2 {
+		color=orange label=Storage
+		DB [label="MongoDB
+(Mongoose)"]
+		FS [label="Local Storage
+(Uploads)"]
+	}
+	UI -> Redux
+	Redux -> API
+	API -> Logic
+	Logic -> AI
+	Logic -> DB
+	Logic -> FS
+	SocketC -> SocketS [label="Real-time"]
+}

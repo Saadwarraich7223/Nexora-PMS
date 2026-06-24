@@ -1,0 +1,300 @@
+﻿{
+  "info": {
+    "name": "Student API (All Routes)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "token", "value": "<student_jwt_token>" }
+  ],
+  "item": [
+    {
+      "name": "Groups",
+      "item": [
+        {
+          "name": "POST /api/student/groups",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Capstone Team A\",\n  \"semester\": 8,\n  \"department\": \"CS\"\n}"
+            },
+            "url": "{{baseUrl}}/api/student/groups"
+          }
+        },
+        {
+          "name": "POST /api/student/groups/invite",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"groupId\": \"<groupId>\",\n  \"receiverId\": \"<studentId>\"\n}"
+            },
+            "url": "{{baseUrl}}/api/student/groups/invite"
+          }
+        },
+        {
+          "name": "POST /api/student/groups/invite/respond",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inviteId\": \"<inviteId>\",\n  \"accept\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/student/groups/invite/respond"
+          }
+        },
+        {
+          "name": "POST /api/student/groups/join",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"groupId\": \"<groupId>\"\n}"
+            },
+            "url": "{{baseUrl}}/api/student/groups/join"
+          }
+        },
+        {
+          "name": "POST /api/student/groups/join/respond",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"<requestId>\",\n  \"accept\": true\n}"
+            },
+            "url": "{{baseUrl}}/api/student/groups/join/respond"
+          }
+        },
+        {
+          "name": "POST /api/student/groups/submit",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"groupId\": \"<groupId>\"\n}"
+            },
+            "url": "{{baseUrl}}/api/student/groups/submit"
+          }
+        },
+        {
+          "name": "GET /api/student/groups/my-group",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/student/groups/my-group"
+          }
+        },
+        {
+          "name": "GET /api/student/groups/:groupId",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/student/groups/:groupId"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "GET /api/student/projects/:groupId",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/student/projects/:groupId"
+          }
+        },
+        {
+          "name": "POST /api/student/projects/submit",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "groupId", "value": "<groupId>", "type": "text" },
+                { "key": "title", "value": "Smart Attendance System", "type": "text" },
+                { "key": "description", "value": "Proposal description here", "type": "text" },
+                { "key": "files", "type": "file", "src": [] }
+              ]
+            },
+            "url": "{{baseUrl}}/api/student/projects/submit"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Resources",
+      "item": [
+        {
+          "name": "GET /api/student/resources",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/student/resources"
+          }
+        },
+        {
+          "name": "POST /api/student/resources/upload",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": "" },
+                { "key": "description", "value": "Requirements document", "type": "text" }
+              ]
+            },
+            "url": "{{baseUrl}}/api/student/resources/upload"
+          }
+        },
+        {
+          "name": "DELETE /api/student/resources/:fileId",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/student/resources/:fileId"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "GET /api/student/tasks",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/student/tasks"
+          }
+        },
+        {
+          "name": "GET /api/student/tasks/:taskId",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/student/tasks/:taskId"
+          }
+        },
+        {
+          "name": "POST /api/student/tasks",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Set up database\",\n  \"description\": \"Create MongoDB schemas\",\n  \"assignedTo\": \"<studentId>\",\n  \"priority\": \"high\",\n  \"deadline\": \"2026-04-10T00:00:00.000Z\",\n  \"status\": \"todo\",\n  \"attachments\": []\n}"
+            },
+            "url": "{{baseUrl}}/api/student/tasks"
+          }
+        },
+        {
+          "name": "PUT /api/student/tasks/:taskId",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Set up database\",\n  \"description\": \"Create MongoDB schemas\",\n  \"assignedTo\": \"<studentId>\",\n  \"priority\": \"medium\",\n  \"deadline\": \"2026-04-15T00:00:00.000Z\",\n  \"status\": \"in-progress\",\n  \"attachments\": []\n}"
+            },
+            "url": "{{baseUrl}}/api/student/tasks/:taskId"
+          }
+        },
+        {
+          "name": "DELETE /api/student/tasks/:taskId",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/student/tasks/:taskId"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Features",
+      "item": [
+        {
+          "name": "GET /api/student/features",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/student/features"
+          }
+        },
+        {
+          "name": "POST /api/student/features",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Attendance Tracking\",\n  \"description\": \"Track student attendance via QR\",\n  \"relatedTasks\": [\"<taskId>\"]\n}"
+            },
+            "url": "{{baseUrl}}/api/student/features"
+          }
+        },
+        {
+          "name": "POST /api/student/features/:featureId/tasks/:taskId",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/student/features/:featureId/tasks/:taskId"
+          }
+        },
+        {
+          "name": "DELETE /api/student/features/:featureId/tasks/:taskId",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/student/features/:featureId/tasks/:taskId"
+          }
+        },
+        {
+          "name": "DELETE /api/student/features/:featureId",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/student/features/:featureId"
+          }
+        }
+      ]
+    }
+  ]
+}

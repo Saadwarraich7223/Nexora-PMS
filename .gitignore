@@ -49,7 +49,7 @@ backend/TESTS_CONTEXT.md
 # TEMP & UPLOAD DIRECTORIES
 # ===========================
 backend/tmp/
-backend/src/uploads/temp/
+backend/src/uploads/
 
 # ===========================
 # OS FILES
@@ -81,3 +81,9 @@ backend/replace-logs.js
 backend/init-grading-templates.js
 backend/seed-rubric.js
 frontend/sanitize.py
+frontend/README.md
+
+# ===========================
+# OPENCODE CONFIG
+# ===========================
+.omo/

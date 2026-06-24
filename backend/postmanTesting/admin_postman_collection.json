@@ -1,0 +1,271 @@
+﻿{
+  "info": {
+    "name": "Admin API (All Routes)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "token", "value": "<admin_jwt_token>" }
+  ],
+  "item": [
+    {
+      "name": "Teachers",
+      "item": [
+        {
+          "name": "GET /api/admin/teachers",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/teachers"
+          }
+        },
+        {
+          "name": "POST /api/admin/teachers",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dr. Ada Lovelace\",\n  \"email\": \"ada@example.com\",\n  \"password\": \"ChangeMe123!\",\n  \"department\": \"CS\",\n  \"supervisorCapacity\": 4\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/teachers"
+          }
+        },
+        {
+          "name": "GET /api/admin/teachers/:teacherId",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/teachers/:teacherId"
+          }
+        },
+        {
+          "name": "PUT /api/admin/teachers/:teacherId",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dr. Ada Lovelace\",\n  \"email\": \"ada@example.com\",\n  \"department\": \"CS\",\n  \"supervisorCapacity\": 5\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/teachers/:teacherId"
+          }
+        },
+        {
+          "name": "PATCH /api/admin/teachers/:teacherId/capacity",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"supervisorCapacity\": 6\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/teachers/:teacherId/capacity"
+          }
+        },
+        {
+          "name": "GET /api/admin/teachers/:teacherId/groups",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/teachers/:teacherId/groups"
+          }
+        },
+        {
+          "name": "DELETE /api/admin/teachers/:teacherId",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/teachers/:teacherId"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Groups",
+      "item": [
+        {
+          "name": "GET /api/admin/groups?status=active",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/groups?status=active"
+          }
+        },
+        {
+          "name": "GET /api/admin/groups/:groupId",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/groups/:groupId"
+          }
+        },
+        {
+          "name": "PATCH /api/admin/groups/:groupId/approve",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/groups/:groupId/approve"
+          }
+        },
+        {
+          "name": "PATCH /api/admin/groups/:groupId/reject",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/groups/:groupId/reject"
+          }
+        },
+        {
+          "name": "PUT /api/admin/groups/:groupId",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Capstone Team A\",\n  \"semester\": 8,\n  \"department\": \"CS\",\n  \"description\": \"Updated group description\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/groups/:groupId"
+          }
+        },
+        {
+          "name": "DELETE /api/admin/groups/:groupId",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/groups/:groupId"
+          }
+        },
+        {
+          "name": "POST /api/admin/groups/:groupId/supervisor",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"supervisorId\": \"<supervisorId>\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/groups/:groupId/supervisor"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Preapproved",
+      "item": [
+        {
+          "name": "POST /api/admin/preapproved/upload",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                { "key": "file", "type": "file", "src": "" }
+              ]
+            },
+            "url": "{{baseUrl}}/api/admin/preapproved/upload"
+          }
+        },
+        {
+          "name": "GET /api/admin/preapproved?department=CS&semester=8&isRegistered=false",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/preapproved?department=CS&semester=8&isRegistered=false"
+          }
+        },
+        {
+          "name": "PUT /api/admin/preapproved/:id",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"registrationNumber\": \"2021-CS-001\",\n  \"department\": \"CS\",\n  \"semester\": 8,\n  \"isRegistered\": false\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/preapproved/:id"
+          }
+        },
+        {
+          "name": "DELETE /api/admin/preapproved/:id",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/preapproved/:id"
+          }
+        },
+        {
+          "name": "DELETE /api/admin/preapproved",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/preapproved"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Supervisors",
+      "item": [
+        {
+          "name": "GET /api/admin/supervisors/recommendations?department=CS",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/supervisors/recommendations?department=CS"
+          }
+        },
+        {
+          "name": "GET /api/admin/supervisors",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/supervisors"
+          }
+        },
+        {
+          "name": "POST /api/admin/supervisors/assign",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"groupId\": \"<groupId>\",\n  \"supervisorId\": \"<supervisorId>\"\n}"
+            },
+            "url": "{{baseUrl}}/api/admin/supervisors/assign"
+          }
+        },
+        {
+          "name": "GET /api/admin/supervisors/:id/workload",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/admin/supervisors/:id/workload"
+          }
+        }
+      ]
+    }
+  ]
+}

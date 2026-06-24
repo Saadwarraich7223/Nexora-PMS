@@ -1,0 +1,153 @@
+﻿{
+  "info": {
+    "name": "Teacher API (All Routes)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "token", "value": "<teacher_jwt_token>" }
+  ],
+  "item": [
+    {
+      "name": "Groups",
+      "item": [
+        {
+          "name": "GET /api/teacher/groups/assigned",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/teacher/groups/assigned"
+          }
+        },
+        {
+          "name": "GET /api/teacher/groups/assigned/:groupId",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/teacher/groups/assigned/:groupId"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "POST /api/teacher/projects/:projectId/approve",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"feedbackMessage\": \"Looks good. Proceed to next phase.\"\n}"
+            },
+            "url": "{{baseUrl}}/api/teacher/projects/:projectId/approve"
+          }
+        },
+        {
+          "name": "POST /api/teacher/projects/:projectId/reject",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"feedbackMessage\": \"Please revise scope and resubmit.\"\n}"
+            },
+            "url": "{{baseUrl}}/api/teacher/projects/:projectId/reject"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Meetings",
+      "item": [
+        {
+          "name": "POST /api/teacher/meetings/groups/:groupId",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": \"2026-04-01T10:00:00.000Z\",\n  \"type\": \"Supervisor Meeting\",\n  \"location\": \"Lab 3\",\n  \"agenda\": \"Review progress and blockers\",\n  \"discussionPoints\": [\"Data model updates\", \"UI backlog\"],\n  \"taskUpdates\": [\n    {\n      \"task\": \"<taskId>\",\n      \"note\": \"Need to finalize schema\",\n      \"status\": \"in-progress\",\n      \"priority\": \"high\",\n      \"deadline\": \"2026-04-10T00:00:00.000Z\"\n    }\n  ],\n  \"featureUpdates\": [\n    {\n      \"feature\": \"<featureId>\",\n      \"note\": \"Started implementation\",\n      \"status\": \"in-progress\",\n      \"progress\": 30\n    }\n  ],\n  \"attendees\": [\"<studentId>\"]\n}"
+            },
+            "url": "{{baseUrl}}/api/teacher/meetings/groups/:groupId"
+          }
+        },
+        {
+          "name": "GET /api/teacher/meetings/groups/:groupId",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/teacher/meetings/groups/:groupId"
+          }
+        },
+        {
+          "name": "DELETE /api/teacher/meetings/:logId",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/teacher/meetings/:logId"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Deadlines",
+      "item": [
+        {
+          "name": "POST /api/teacher/deadlines/projects/:projectId",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Initial Prototype\",\n  \"dueDate\": \"2026-04-20T00:00:00.000Z\"\n}"
+            },
+            "url": "{{baseUrl}}/api/teacher/deadlines/projects/:projectId"
+          }
+        },
+        {
+          "name": "GET /api/teacher/deadlines/projects/:projectId",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/teacher/deadlines/projects/:projectId"
+          }
+        },
+        {
+          "name": "DELETE /api/teacher/deadlines/:deadlineId",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/teacher/deadlines/:deadlineId"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Resources",
+      "item": [
+        {
+          "name": "GET /api/teacher/resources/groups/:groupId",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": "{{baseUrl}}/api/teacher/resources/groups/:groupId"
+          }
+        }
+      ]
+    }
+  ]
+}
