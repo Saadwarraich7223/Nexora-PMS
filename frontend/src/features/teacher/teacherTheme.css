@@ -1,0 +1,77 @@
+.teacher-role {
+  --teacher-surface: rgba(255, 255, 255, 0.9);
+  --teacher-surface-border: rgba(203, 213, 225, 0.9);
+  --teacher-card-border-today: #f43f5e;
+  --teacher-card-bg-today: rgba(255, 228, 230, 0.2);
+  --teacher-card-border-tomorrow: #f59e0b;
+  --teacher-card-bg-tomorrow: rgba(254, 243, 199, 0.2);
+  --teacher-card-border-upcoming: #34d399;
+  --teacher-card-bg-upcoming: rgba(236, 253, 245, 0.2);
+  --teacher-badge-bg-today: #ffe4e6;
+  --teacher-badge-border-today: #fda4af;
+  --teacher-badge-text-today: #be123c;
+  --teacher-badge-bg-tomorrow: #fef3c7;
+  --teacher-badge-border-tomorrow: #fcd34d;
+  --teacher-badge-text-tomorrow: #92400e;
+  --teacher-badge-bg-upcoming: #ecfdf5;
+  --teacher-badge-border-upcoming: #a7f3d0;
+  --teacher-badge-text-upcoming: #047857;
+  --teacher-capacity-track: #e2e8f0;
+  --teacher-capacity-fill: #0f172a;
+}
+
+.teacher-meeting-card {
+
+  background: var(--teacher-surface);
+  border: 1px solid var(--teacher-surface-border);
+  transition: box-shadow 140ms ease;
+}
+
+.teacher-meeting-card:hover {
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.teacher-meeting-card-today {
+  /* border-left-color: var(--teacher-card-border-today); */
+  background: var(--teacher-card-bg-today);
+}
+
+.teacher-meeting-card-tomorrow {
+  /* border-left-color: var(--teacher-card-border-tomorrow); */
+  background: var(--teacher-card-bg-tomorrow);
+}
+
+.teacher-meeting-card-upcoming {
+  /* border-left-color: var(--teacher-card-border-upcoming); */
+  background: var(--teacher-card-bg-upcoming);
+}
+
+.teacher-meeting-badge {
+  border-width: 1px;
+}
+
+.teacher-meeting-badge-today {
+  background: var(--teacher-badge-bg-today);
+  border-color: var(--teacher-badge-border-today);
+  color: var(--teacher-badge-text-today);
+}
+
+.teacher-meeting-badge-tomorrow {
+  background: var(--teacher-badge-bg-tomorrow);
+  border-color: var(--teacher-badge-border-tomorrow);
+  color: var(--teacher-badge-text-tomorrow);
+}
+
+.teacher-meeting-badge-upcoming {
+  background: var(--teacher-badge-bg-upcoming);
+  border-color: var(--teacher-badge-border-upcoming);
+  color: var(--teacher-badge-text-upcoming);
+}
+
+.teacher-capacity-track {
+  background: var(--teacher-capacity-track);
+}
+
+.teacher-capacity-fill {
+  background: var(--teacher-capacity-fill);
+}
