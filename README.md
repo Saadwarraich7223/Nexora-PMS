@@ -87,6 +87,40 @@ A comprehensive MERN-stack platform for managing university Final Year Projects 
 
 ---
 
+## Screenshots
+
+### Auth & Onboarding
+
+| Login Page | Register Page |
+|---|---|
+| ![Login Page](screenshots/Nexora-login-page.png) | ![Register Page](screenshots/Nexora-register-page.png) |
+
+### Admin Portal
+
+| Dashboard | Faculty Management |
+|---|---|
+| ![Admin Dashboard](screenshots/Nexora-admin-dashboard.png) | ![Admin Faculty Page](screenshots/Nexora-admin-faculty-page.png) |
+
+### Student Portal
+
+| Dashboard | Group Management | Task Board |
+|---|---|---|
+| ![Student Dashboard](screenshots/Nexora-student-dashboard.png) | ![Student Group Page](screenshots/Nexora-student-group-page.png) | ![Student Task Page](screenshots/Nexora-student-task-page.png) |
+
+### Supervisor Portal
+
+| Groups Overview | Project Reviews |
+|---|---|
+| ![Supervisor Groups Page](screenshots/Nexora-supervisor-groups-page.png) | ![Supervisor Projects Page](screenshots/Nexora-supervisor-projects-page.png) |
+
+### Calendar
+
+| Calendar View |
+|---|
+| ![Calendar Page](screenshots/Nexora-calender-page.jpg) |
+
+---
+
 ## Tech Stack
 
 ### Backend
