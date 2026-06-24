@@ -1,0 +1,53 @@
+/* AI Chat styles now handled entirely by Tailwind CSS */
+/* This file is intentionally empty */
+
+/* Markdown content overrides for inside chat bubbles */
+.wmde-markdown {
+  background: transparent !important;
+  font-family: inherit !important;
+}
+.wmde-markdown ul {
+  list-style-type: disc;
+  padding-left: 16px;
+  margin: 8px 0;
+}
+.wmde-markdown ol {
+  list-style-type: decimal;
+  padding-left: 16px;
+  margin: 8px 0;
+}
+.wmde-markdown li {
+  margin-bottom: 4px;
+}
+.wmde-markdown strong, .wmde-markdown b {
+  font-weight: 700;
+}
+.wmde-markdown code {
+  background: rgba(0,0,0,0.05);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 0.8em;
+}
+.wmde-markdown p {
+  margin: 6px 0;
+}
+.wmde-markdown h1, .wmde-markdown h2, .wmde-markdown h3 {
+  border: none !important;
+  margin: 10px 0 4px;
+  font-size: 1.05em;
+  font-weight: 700;
+  color: #1e293b;
+}
+.wmde-markdown blockquote {
+  border-left: 3px solid #cbd5e1;
+  padding-left: 12px;
+  margin: 12px 0;
+  color: #64748b;
+  font-style: italic;
+}
+.wmde-markdown hr {
+  height: 1px;
+  background: #f1f5f9;
+  border: none;
+  margin: 14px 0;
+}
