@@ -1,0 +1,272 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Manrope", system-ui, sans-serif;
+  color: #1e293b; /* darker slate text for contrast */
+
+  /* Cards */
+  --card-bg: rgba(255, 255, 255, 0.96); /* brighter card */
+  --card-surface: rgba(226, 232, 240, 0.95); /* deeper surface */
+  --card-border: rgba(148, 163, 184, 0.45); /* stronger border */
+
+  /* Bars / progress */
+  --bar-track: #cbd5e1; /* stronger track */
+  --bar-supervisor: #10b981; /* emerald green */
+  --bar-group: #3b82f6; /* blue accent */
+
+  /* Pills / badges */
+  --pill-bg: rgba(226, 232, 240, 0.95); /* subtle gray */
+  --text-muted: #64748b; /* muted text */
+  --text-strong: #1e293b; /* main text */
+
+  /* Admin surface contrast controls */
+  --admin-panel-bg: rgba(255, 255, 255, 0.9);
+  --admin-panel-border: rgba(255, 255, 255, 0.58);
+  --admin-subtle-bg: rgba(248, 250, 252, 0.85);
+  --admin-subtle-border: rgba(226, 232, 240, 0.92);
+  --admin-input-bg: rgba(255, 255, 255, 0.98);
+  --admin-input-border: rgba(203, 213, 225, 0.96);
+  --admin-input-text: #1f2937;
+  --admin-input-placeholder: #6b7280;
+  --admin-muted-text: #64748b;
+  --admin-row-divider: rgba(226, 232, 240, 0.95);
+  --admin-accent-surface: linear-gradient(
+    140deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(240, 249, 255, 0.88) 52%,
+    rgba(236, 253, 245, 0.86) 100%
+  );
+  --admin-accent-border: rgba(186, 230, 253, 0.75);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-image: linear-gradient(180deg, #dbe5f1 0%, #cbd5e1 100%);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+@layer components {
+  .glass-card {
+    background: var(--card-bg);
+
+    @apply rounded-2xl shadow-sm backdrop-blur-xl;
+  }
+
+  .nav-panel-bg {
+    @apply bg-gradient-to-r from-white/80 via-white/60 to-white/80 
+         border border-white/80 
+         shadow-[0_2px_12px_-3px_rgba(0,0,0,0.08)] 
+         backdrop-blur-xl transition-all duration-500;
+  }
+
+  .nav-pill {
+    @apply rounded-full border border-slate-300/70 bg-slate-100/90 px-4 py-2 text-sm font-semibold text-slate-700;
+  }
+
+  .icon-pill {
+    @apply flex h-10 w-10 items-center justify-center rounded-full bg-slate-100/90 text-slate-700;
+  }
+
+  .status-pill {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-semibold text-white bg-indigo-500/80;
+  }
+
+  .card-surface {
+    background: var(--card-surface);
+  }
+
+  .admin-panel {
+    background: var(--admin-panel-bg);
+    border-color: var(--admin-panel-border);
+  }
+
+  .admin-subtle-surface {
+    background: var(--admin-subtle-bg);
+    border-color: var(--admin-subtle-border);
+  }
+
+  .admin-muted-text {
+    color: var(--admin-muted-text);
+  }
+
+  .admin-input {
+    background: var(--admin-input-bg);
+    border: 1px solid var(--admin-input-border);
+    color: var(--admin-input-text);
+    outline: none;
+    transition:
+      border-color 140ms ease,
+      box-shadow 140ms ease,
+      background-color 140ms ease;
+  }
+
+  .admin-input::placeholder {
+    color: var(--admin-input-placeholder);
+  }
+
+  .admin-input:focus {
+    border-color: rgba(148, 163, 184, 0.85);
+    box-shadow: 0 0 0 2px rgba(191, 219, 254, 0.45);
+  }
+
+  .admin-table-shell {
+    background: var(--admin-subtle-bg);
+    border: 1px solid var(--admin-subtle-border);
+  }
+
+  .admin-table-divider {
+    border-color: var(--admin-row-divider);
+  }
+
+  .admin-accent-panel {
+    background: var(--admin-accent-surface);
+    border: 1px solid var(--admin-accent-border);
+  }
+}
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+  background: rgba(203, 213, 225, 0.55);
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer-move 1.2s infinite;
+}
+
+@keyframes shimmer-move {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* --- Comprehensive Custom Scrollbar System --- */
+
+/* Base scrollbar structure for all elements */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+  background-clip: padding-box;
+}
+
+/* Role-Based Global Design Tokens */
+[data-role="admin"] {
+  --role-accent: #4f46e5; /* Indigo 600 */
+  --role-accent-soft: rgba(79, 70, 229, 0.08);
+  --role-accent-border: rgba(79, 70, 229, 0.2);
+  --sb-thumb-color: #4f46e5;
+  --sb-thumb-hover: #3730a3;
+}
+
+[data-role="teacher"] {
+  --role-accent: #10b981; /* Emerald 500 */
+  --role-accent-soft: rgba(16, 185, 129, 0.08);
+  --role-accent-border: rgba(16, 185, 129, 0.2);
+  --sb-thumb-color: #10b981;
+  --sb-thumb-hover: #059669;
+}
+
+[data-role="student"] {
+  --role-accent: #f59e0b; /* Amber 500 */
+  --role-accent-soft: rgba(245, 158, 11, 0.08);
+  --role-accent-border: rgba(245, 158, 11, 0.2);
+  --sb-thumb-color: #f59e0b;
+  --sb-thumb-hover: #d97706;
+}
+
+/* Scrollbar Integration using Tokens */
+[data-role] ::-webkit-scrollbar-thumb,
+[data-role]::-webkit-scrollbar-thumb {
+  background-color: var(--sb-thumb-color) !important;
+}
+
+[data-role] ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--sb-thumb-hover) !important;
+}
+
+/* Hide native scrollbars where requested */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+/* Tactical Utility Classes */
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+.custom-scrollbar-horizontal::-webkit-scrollbar {
+  height: 4px;
+}
+
+.custom-scrollbar-horizontal::-webkit-scrollbar-track {
+  background: rgba(226, 232, 240, 0.4);
+  border-radius: 10px;
+}
+
+.custom-scrollbar-horizontal::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
