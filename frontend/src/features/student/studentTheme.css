@@ -1,0 +1,368 @@
+.student-role {
+  --student-bg-grad-start: #e6f7ff;
+  --student-bg-grad-mid: #eef2ff;
+  --student-bg-grad-end: #ecfeff;
+  --student-text-strong: #0f172a;
+  --student-text-muted: #64748b;
+  --student-card-bg: rgba(255, 255, 255, 0.92);
+  --student-card-border: rgba(191, 219, 254, 0.72);
+  --student-accent-surface: linear-gradient(
+    140deg,
+    rgba(219, 234, 254, 0.7) 0%,
+    rgba(224, 231, 255, 0.72) 55%,
+    rgba(204, 251, 241, 0.68) 100%
+  );
+  --student-accent-border: rgba(147, 197, 253, 0.5);
+  --student-pill-bg: rgba(255, 255, 255, 0.78);
+  --student-pill-border: rgba(148, 163, 184, 0.35);
+  --student-info-bg: rgba(248, 250, 252, 0.8);
+  --student-info-border: rgba(203, 213, 225, 0.7);
+  --student-unread-chip-bg: linear-gradient(
+    135deg,
+    rgba(37, 99, 235, 0.95) 0%,
+    rgba(79, 70, 229, 0.95) 100%
+  );
+  --student-unread-chip-text: #ffffff;
+  --student-unread-bg: linear-gradient(
+    130deg,
+    rgba(219, 234, 254, 0.85) 0%,
+    rgba(224, 231, 255, 0.82) 100%
+  );
+  --student-unread-border: rgba(99, 102, 241, 0.55);
+  --student-read-bg: rgba(248, 250, 252, 0.7);
+  --student-read-border: rgba(203, 213, 225, 0.65);
+}
+
+.student-gradient-hero {
+  background:
+    radial-gradient(
+      circle at 18% 14%,
+      rgba(59, 130, 246, 0.24),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 84% 20%,
+      rgba(16, 185, 129, 0.22),
+      transparent 40%
+    ),
+    linear-gradient(
+      135deg,
+      var(--student-bg-grad-start) 0%,
+      var(--student-bg-grad-mid) 55%,
+      var(--student-bg-grad-end) 100%
+    );
+  border: 1px solid var(--student-card-border);
+}
+
+.student-premium-card {
+  background: var(--student-card-bg);
+  border: 1px solid var(--student-card-border);
+}
+
+.student-accent-card {
+  background: var(--student-accent-surface);
+  border: 1px solid var(--student-accent-border);
+}
+
+.student-info-tile {
+  background: var(--student-info-bg);
+  border: 1px solid var(--student-info-border);
+}
+
+.student-chip {
+  background: var(--student-pill-bg);
+  border: 1px solid var(--student-pill-border);
+}
+
+.student-text-muted {
+  color: var(--student-text-muted);
+}
+
+.student-glow {
+  box-shadow:
+    0 8px 24px rgba(59, 130, 246, 0.08),
+    0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.student-unread-chip {
+  background: var(--student-unread-chip-bg);
+  color: var(--student-unread-chip-text);
+}
+
+.student-notif-unread {
+  background: var(--student-unread-bg);
+  border: 1px solid var(--student-unread-border);
+}
+
+.student-notif-read {
+  background: var(--student-read-bg);
+  border: 1px solid var(--student-read-border);
+}
+
+.student-metric-total {
+  color: #0369a1;
+}
+
+.student-metric-mine {
+  color: #4338ca;
+}
+
+.student-metric-todo {
+  color: #b45309;
+}
+
+.student-metric-progress {
+  color: #0f766e;
+}
+
+.student-status-chip {
+  border: 1px solid transparent;
+}
+
+.student-status-active {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #166534;
+}
+
+.student-status-pending {
+  background: #fef3c7;
+  border-color: #fcd34d;
+  color: #92400e;
+}
+
+.student-status-rejected {
+  background: #ffe4e6;
+  border-color: #fda4af;
+  color: #9f1239;
+}
+
+.student-status-submitted,
+.student-status-under_review {
+  background: #dbeafe;
+  border-color: #93c5fd;
+  color: #1d4ed8;
+}
+
+.student-status-approved,
+.student-status-in_progress {
+  background: #ccfbf1;
+  border-color: #5eead4;
+  color: #0f766e;
+}
+
+.student-status-completed {
+  background: #dcfce7;
+  border-color: #86efac;
+  color: #166534;
+}
+
+.student-status-draft,
+.student-status-none {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+
+.student-role-chip-leader {
+  background: #ede9fe;
+  border: 1px solid #c4b5fd;
+  color: #5b21b6;
+}
+
+.student-role-chip-member {
+  background: #e0f2fe;
+  border: 1px solid #7dd3fc;
+  color: #075985;
+}
+
+.student-role {
+  --student-drawer-overlay: rgba(15, 23, 42, 0.42);
+  --student-drawer-surface: rgba(255, 255, 255, 0.96);
+  --student-drawer-border: rgba(191, 219, 254, 0.74);
+  --student-drawer-shadow: 0 22px 48px rgba(15, 23, 42, 0.18);
+}
+
+.student-drawer-overlay {
+  background: var(--student-drawer-overlay);
+}
+
+.student-drawer {
+  background: var(--student-drawer-surface);
+  border: 1px solid var(--student-drawer-border);
+  box-shadow: var(--student-drawer-shadow);
+}
+
+.student-role {
+  --student-form-bg: rgba(255, 255, 255, 0.94);
+  --student-form-border: rgba(148, 163, 184, 0.35);
+}
+
+.student-form-control {
+  background: var(--student-form-bg);
+  border: 1px solid var(--student-form-border);
+}
+
+.student-priority-high {
+  background: #ffe4e6;
+  border: 1px solid #fda4af;
+  color: #9f1239;
+}
+
+.student-priority-medium {
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  color: #92400e;
+}
+
+.student-priority-low {
+  background: #e0f2fe;
+  border: 1px solid #7dd3fc;
+  color: #075985;
+}
+
+.student-sender-admin {
+  background: #ede9fe;
+  border: 1px solid #c4b5fd;
+  color: #5b21b6;
+}
+
+.student-sender-teacher {
+  background: #cffafe;
+  border: 1px solid #67e8f9;
+  color: #155e75;
+}
+
+.student-sender-student {
+  background: #dcfce7;
+  border: 1px solid #86efac;
+  color: #166534;
+}
+
+.student-sender-system {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #334155;
+}
+
+.student-role {
+  --student-kanban-col-bg: rgba(255, 255, 255, 0.72);
+  --student-kanban-col-border: rgba(148, 163, 184, 0.28);
+  --student-kanban-card-bg: rgba(255, 255, 255, 0.9);
+  --student-kanban-card-border: rgba(203, 213, 225, 0.72);
+}
+
+.student-kanban-col {
+  background: var(--student-kanban-col-bg);
+  border: 1px solid var(--student-kanban-col-border);
+  min-height: 420px;
+}
+
+.student-kanban-card {
+  background: var(--student-kanban-card-bg);
+  border: 1px solid var(--student-kanban-card-border);
+  cursor: grab;
+}
+
+.student-kanban-card:active {
+  cursor: grabbing;
+}
+
+.student-kanban-todo {
+  box-shadow: inset 0 0 0 1px rgba(14, 116, 144, 0.08);
+}
+
+.student-kanban-progress {
+  box-shadow: inset 0 0 0 1px rgba(8, 145, 178, 0.12);
+}
+
+.student-kanban-review {
+  box-shadow: inset 0 0 0 1px rgba(217, 119, 6, 0.12);
+}
+
+.student-kanban-completed {
+  box-shadow: inset 0 0 0 1px rgba(22, 163, 74, 0.12);
+}
+
+.student-detail-drawer .student-info-tile {
+  background: rgba(255, 255, 255, 0.65); /* more visible */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* subtle contrast */
+  backdrop-filter: blur(8px); /* glass effect */
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.student-detail-drawer .student-form-control {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.student-feature-card {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.student-feature-link-chip {
+  background: rgba(224, 231, 255, 0.62);
+  border: 1px solid rgba(165, 180, 252, 0.55);
+}
+
+.student-feature-card-pending {
+  border-color: rgba(251, 191, 36, 0.42);
+  box-shadow: inset 0 0 0 1px rgba(251, 191, 36, 0.14);
+}
+
+.student-feature-card-in-progress {
+  border-color: rgba(45, 212, 191, 0.44);
+  box-shadow: inset 0 0 0 1px rgba(45, 212, 191, 0.14);
+}
+
+.student-feature-card-completed {
+  border-color: rgba(74, 222, 128, 0.44);
+  box-shadow: inset 0 0 0 1px rgba(74, 222, 128, 0.14);
+}
+
+.student-feature-task-pill {
+  min-width: 180px;
+  border: 1px solid transparent;
+  background: rgba(248, 250, 252, 0.88);
+}
+
+.student-feature-status-badge {
+  border: 1px solid transparent;
+}
+
+.student-feature-status-pending {
+  background: rgba(254, 243, 199, 0.78);
+  border-color: rgba(245, 158, 11, 0.45);
+  color: #92400e;
+}
+
+.student-feature-status-progress {
+  background: rgba(204, 251, 241, 0.78);
+  border-color: rgba(20, 184, 166, 0.45);
+  color: #115e59;
+}
+
+.student-feature-status-completed {
+  background: rgba(220, 252, 231, 0.82);
+  border-color: rgba(34, 197, 94, 0.42);
+  color: #166534;
+}
+
+/* -- Premium Scrollbar -- */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
+}
