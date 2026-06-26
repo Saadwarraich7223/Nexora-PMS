@@ -7,6 +7,7 @@ import Group from "../../models/group.model.js";
 import { createNotification } from "../../services/notification.service.js";
 import { sendEmail } from "../../services/email.service.js";
 import config from "../../config/env.js";
+import intelligenceService from "../../services/intelligence.service.js";
 
 const universityName = config.universityName || "University";
 
@@ -338,6 +339,26 @@ export const resolveSignal = asyncHandler(async (req, res) => {
     success: true,
     message: "Signal resolved and tactical protocols executed.",
     data: signal,
+  });
+});
+
+/**
+ * @desc    Get predictive health forecast for a specific group
+ * @route   GET /api/v1/admin/analytics/groups/:groupId/health-forecast
+ * @access  Private (Admin only)
+ */
+export const getGroupHealthForecast = asyncHandler(async (req, res) => {
+  const { groupId } = req.params;
+  const forecast = await intelligenceService.getProjectHealthForecast(groupId);
+
+  if (!forecast) {
+    res.status(404).json({ success: false, message: "Group health telemetry unavailable." });
+    return;
+  }
+
+  res.status(200).json({
+    success: true,
+    data: forecast,
   });
 });
 

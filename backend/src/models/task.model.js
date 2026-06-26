@@ -57,6 +57,10 @@ const taskSchema = new mongoose.Schema(
         ref: "File",
       },
     ],
+    rubricCriteria: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "RubricCriteria",
+    },
   },
   { timestamps: true },
 );

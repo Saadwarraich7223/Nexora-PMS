@@ -15,7 +15,10 @@ import {
   FiArrowRight,
 } from "react-icons/fi";
 import { HiSparkles } from "react-icons/hi";
+import { BsAward as GraduationCap } from "react-icons/bs";
 import LoadingSkeleton from "../../../../components/ui/LoadingSkeleton.jsx";
+import HealthForecastingHub from "../analytics/HealthForecastingHub.jsx";
+import RubricCoverageDashboard from "../analytics/RubricCoverageDashboard.jsx";
 
 const formatDate = (value) => {
   if (!value) return "?";
@@ -36,9 +39,11 @@ const GroupDetailDrawer = ({
   onReject,
   onActivate,
   onAssign,
-  onDelete, // Though user said don't show delete button, we keep prop for safety
+  onDelete, 
   actionStatus,
 }) => {
+  const [activeTab, setActiveTab] = React.useState("identity");
+  
   if (!open) return null;
 
   const members = Array.isArray(group?.members)
@@ -109,180 +114,223 @@ const GroupDetailDrawer = ({
             <LoadingSkeleton className="h-48 w-full rounded-2xl" />
           </div>
         ) : (
-          <div className="flex-1 overflow-y-auto custom-scrollbar space-y-6 pr-1">
-            {/* Tactical Status Matrix */}
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 bg-slate-50/50 rounded-2xl border border-slate-100">
-                <p className="text-[9px] font-black text-slate-400 uppercase tracking-tight mb-2">
-                  Formation Status
-                </p>
-                <div className="flex items-center gap-2">
-                  <div
-                    className={`h-2 w-2 rounded-full anim-pulse-slow ${groupStatus === "active" ? "bg-emerald-500" : "bg-amber-500"}`}
-                  ></div>
-                  <span
-                    className={`text-xs font-black uppercase ${groupStatus === "active" ? "text-emerald-600" : "text-amber-600"}`}
-                  >
-                    {groupStatus}
-                  </span>
-                </div>
-                <p className="text-[9px] text-slate-400 font-medium mt-1">
-                  Lifecycle Phase
-                </p>
-              </div>
-              <div className="p-4 bg-slate-50/50 rounded-2xl border border-slate-100">
-                <p className="text-[9px] font-black text-slate-400 uppercase tracking-tight mb-2">
-                  Deployment Date
-                </p>
-                <div className="flex items-center gap-2 text-slate-800">
-                  <FiClock size={12} className="text-indigo-500" />
-                  <span className="text-xs font-black uppercase">
-                    {formatDate(group?.createdAt)}
-                  </span>
-                </div>
-                <p className="text-[9px] text-slate-400 font-medium mt-1">
-                  Registry Entry
-                </p>
-              </div>
+          <div className="flex-1 flex flex-col overflow-hidden">
+            {/* High-Fidelity Tab Navigation */}
+            <div className="flex items-center gap-1 mb-6 p-1 bg-slate-100/50 rounded-2xl border border-slate-100">
+               <button 
+                 onClick={() => setActiveTab("identity")}
+                 className={`flex-1 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${activeTab === "identity" ? "bg-white text-slate-900 shadow-sm border border-slate-100" : "text-slate-400 hover:text-slate-600"}`}
+               >
+                 Operational Meta
+               </button>
+               <button 
+                 onClick={() => setActiveTab("strategic")}
+                 className={`flex-1 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${activeTab === "strategic" ? "bg-slate-900 text-white shadow-lg shadow-slate-900/10" : "text-slate-400 hover:text-slate-600"}`}
+               >
+                 <HiSparkles size={12} className={activeTab === "strategic" ? "text-indigo-400" : "opacity-0"} />
+                 Strategic Intel
+               </button>
             </div>
 
-            {/* Core intelligence */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <FiActivity className="text-slate-400" size={12} />
-                <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                  Description & Scope
-                </h4>
-              </div>
-              <div className="bg-slate-50/30 p-4 border border-slate-100 rounded-2xl italic">
-                <p className="text-[11px] font-medium text-slate-500 leading-relaxed">
-                  "
-                  {group.description ||
-                    "Operational parameters not specified for this cohort."}
-                  "
-                </p>
-              </div>
-            </div>
-
-            {/* Strategic Asset: Project */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <FiLayers className="text-slate-400" size={12} />
-                <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                  Assigned Project
-                </h4>
-              </div>
-              <div className="flex items-center justify-between p-3 bg-white border border-slate-100 rounded-xl hover:shadow-sm transition-all group">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 shadow-inner">
-                    <FiLayers size={18} />
-                  </div>
-                  <div>
-                    <p className="text-[12px] font-black text-slate-800 group-hover:text-indigo-600 transition-colors leading-tight">
-                      {projectTitle}
-                    </p>
-                    <p className="text-[9px] font-bold text-slate-400 uppercase tracking-tight mt-0.5">
-                      Active Operation Node
-                    </p>
-                  </div>
-                </div>
-                <span
-                  className={`text-[8px] font-black uppercase px-2 py-1 rounded-lg border shadow-sm ${projectStatusStyles}`}
-                >
-                  {projectStatus.replace("_", " ")}
-                </span>
-              </div>
-            </div>
-
-            {/* Resource Matrix: Members */}
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <FiUsers className="text-slate-400" size={12} />
-                  <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                    Personnel Matrix
-                  </h4>
-                </div>
-                <span className="text-[10px] font-black text-slate-700">
-                  {members.length} / {group.maxMembers || 4} Assets
-                </span>
-              </div>
-              <div className="space-y-2">
-                {members.map((m, idx) => {
-                  const member = m.user || m;
-                  const memberId = member?._id || m._id;
-                  const isLeader =
-                    leaderId && String(leaderId) === String(memberId);
-                  return (
-                    <div
-                      key={idx}
-                      className="flex items-center justify-between p-3 bg-white border border-slate-100 rounded-xl hover:shadow-sm transition-all"
-                    >
-                      <div className="flex items-center gap-3">
+            <div className="flex-1 overflow-y-auto custom-scrollbar space-y-6 pr-1">
+              {activeTab === "identity" ? (
+                <>
+                  {/* Tactical Status Matrix */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="p-4 bg-slate-50/50 rounded-2xl border border-slate-100">
+                      <p className="text-[9px] font-black text-slate-400 uppercase tracking-tight mb-2">
+                        Formation Status
+                      </p>
+                      <div className="flex items-center gap-2">
                         <div
-                          className={`h-8 w-8 rounded-lg flex items-center justify-center text-[10px] font-black border transition-all ${isLeader ? "bg-amber-500 border-amber-400 text-white" : "bg-slate-50 border-slate-100 text-slate-400"}`}
+                          className={`h-2 w-2 rounded-full anim-pulse-slow ${groupStatus === "active" ? "bg-emerald-500" : "bg-amber-500"}`}
+                        ></div>
+                        <span
+                          className={`text-xs font-black uppercase ${groupStatus === "active" ? "text-emerald-600" : "text-amber-600"}`}
                         >
-                          <FiUser size={14} />
+                          {groupStatus}
+                        </span>
+                      </div>
+                      <p className="text-[9px] text-slate-400 font-medium mt-1">
+                        Lifecycle Phase
+                      </p>
+                    </div>
+                    <div className="p-4 bg-slate-50/50 rounded-2xl border border-slate-100">
+                      <p className="text-[9px] font-black text-slate-400 uppercase tracking-tight mb-2">
+                        Deployment Date
+                      </p>
+                      <div className="flex items-center gap-2 text-slate-800">
+                        <FiClock size={12} className="text-indigo-500" />
+                        <span className="text-xs font-black uppercase">
+                          {formatDate(group?.createdAt)}
+                        </span>
+                      </div>
+                      <p className="text-[9px] text-slate-400 font-medium mt-1">
+                        Registry Entry
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Core intelligence */}
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <FiActivity className="text-slate-400" size={12} />
+                      <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                        Description & Scope
+                      </h4>
+                    </div>
+                    <div className="bg-slate-50/30 p-4 border border-slate-100 rounded-2xl italic">
+                      <p className="text-[11px] font-medium text-slate-500 leading-relaxed">
+                        "
+                        {group.description ||
+                          "Operational parameters not specified for this cohort."}
+                        "
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Strategic Asset: Project */}
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <FiLayers className="text-slate-400" size={12} />
+                      <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                        Assigned Project
+                      </h4>
+                    </div>
+                    <div className="flex items-center justify-between p-3 bg-white border border-slate-100 rounded-xl hover:shadow-sm transition-all group">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 shadow-inner">
+                          <FiLayers size={18} />
                         </div>
                         <div>
-                          <p className="text-[11px] font-black text-slate-700 leading-tight">
-                            {member?.name || "Student Asset"}
+                          <p className="text-[12px] font-black text-slate-800 group-hover:text-indigo-600 transition-colors leading-tight">
+                            {projectTitle}
                           </p>
-                          <p className="text-[9px] font-bold text-slate-400 lowercase tracking-tight">
-                            {member?.email || "No contact verified"}
+                          <p className="text-[9px] font-bold text-slate-400 uppercase tracking-tight mt-0.5">
+                            Active Operation Node
                           </p>
                         </div>
                       </div>
-                      {isLeader && (
-                        <span className="bg-amber-50 text-amber-600 text-[8px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded-lg border border-amber-100">
-                          Leader
-                        </span>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Tactical Support: Supervisor */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-2">
-                <FiUser className="text-slate-400" size={12} />
-                <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                  Assigned Support
-                </h4>
-              </div>
-              {supervisorName ? (
-                <div className="flex items-center justify-between p-3 bg-white border border-slate-100 rounded-xl hover:shadow-sm transition-all cursor-pointer group">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-white shadow-xl shadow-slate-900/10">
-                      <FiUser size={18} />
-                    </div>
-                    <div>
-                      <p className="text-[12px] font-black text-slate-800 group-hover:text-indigo-600 transition-colors leading-tight">
-                        {supervisorName}
-                      </p>
-                      <p className="text-[9px] font-bold text-slate-400 uppercase tracking-tight mt-0.5">
-                        {supervisorEmail}
-                      </p>
+                      <span
+                        className={`text-[8px] font-black uppercase px-2 py-1 rounded-lg border shadow-sm ${projectStatusStyles}`}
+                      >
+                        {projectStatus.replace("_", " ")}
+                      </span>
                     </div>
                   </div>
-                  <FiArrowRight
-                    size={14}
-                    className="text-slate-300 transition-transform group-hover:translate-x-1"
-                  />
-                </div>
+
+                  {/* Resource Matrix: Members */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <FiUsers className="text-slate-400" size={12} />
+                        <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                          Personnel Matrix
+                        </h4>
+                      </div>
+                      <span className="text-[10px] font-black text-slate-700">
+                        {members.length} / {group.maxMembers || 4} Assets
+                      </span>
+                    </div>
+                    <div className="space-y-2">
+                      {members.map((m, idx) => {
+                        const member = m.user || m;
+                        const memberId = member?._id || m._id;
+                        const isLeader =
+                          leaderId && String(leaderId) === String(memberId);
+                        return (
+                          <div
+                            key={idx}
+                            className="flex items-center justify-between p-3 bg-white border border-slate-100 rounded-xl hover:shadow-sm transition-all"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div
+                                className={`h-8 w-8 rounded-lg flex items-center justify-center text-[10px] font-black border transition-all ${isLeader ? "bg-amber-500 border-amber-400 text-white" : "bg-slate-50 border-slate-100 text-slate-400"}`}
+                              >
+                                <FiUser size={14} />
+                              </div>
+                              <div>
+                                <p className="text-[11px] font-black text-slate-700 leading-tight">
+                                  {member?.name || "Student Asset"}
+                                </p>
+                                <p className="text-[9px] font-bold text-slate-400 lowercase tracking-tight">
+                                  {member?.email || "No contact verified"}
+                                </p>
+                              </div>
+                            </div>
+                            {isLeader && (
+                              <span className="bg-amber-50 text-amber-600 text-[8px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded-lg border border-amber-100">
+                                Leader
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Tactical Support: Supervisor */}
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <FiUser className="text-slate-400" size={12} />
+                      <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                        Assigned Support
+                      </h4>
+                    </div>
+                    {supervisorName ? (
+                      <div className="flex items-center justify-between p-3 bg-white border border-slate-100 rounded-xl hover:shadow-sm transition-all cursor-pointer group">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-white shadow-xl shadow-slate-900/10">
+                            <FiUser size={18} />
+                          </div>
+                          <div>
+                            <p className="text-[12px] font-black text-slate-800 group-hover:text-indigo-600 transition-colors leading-tight">
+                              {supervisorName}
+                            </p>
+                            <p className="text-[9px] font-bold text-slate-400 uppercase tracking-tight mt-0.5">
+                              {supervisorEmail}
+                            </p>
+                          </div>
+                        </div>
+                        <FiArrowRight
+                          size={14}
+                          className="text-slate-300 transition-transform group-hover:translate-x-1"
+                        />
+                      </div>
+                    ) : (
+                      <div className="p-8 text-center border-2 border-dashed border-slate-100 rounded-2xl bg-slate-50/50">
+                        <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">
+                          No Support Assigned
+                        </p>
+                        <button
+                          onClick={() => onAssign(group)}
+                          className="mt-2 text-[10px] font-black text-indigo-600 uppercase tracking-widest hover:underline"
+                        >
+                          Assign Supervisor Now
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </>
               ) : (
-                <div className="p-8 text-center border-2 border-dashed border-slate-100 rounded-2xl bg-slate-50/50">
-                  <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">
-                    No Support Assigned
-                  </p>
-                  <button
-                    onClick={() => onAssign(group)}
-                    className="mt-2 text-[10px] font-black text-indigo-600 uppercase tracking-widest hover:underline"
-                  >
-                    Assign Supervisor Now
-                  </button>
+                <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                   {/* Health Telemetry Section */}
+                   <div className="space-y-4">
+                      <div className="flex items-center gap-2 px-1">
+                         <FiActivity className="text-indigo-500" size={14} />
+                         <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-800">Project Health Telemetry</h4>
+                      </div>
+                      <HealthForecastingHub groupId={group?._id || group?.id} groupName={group?.name} />
+                   </div>
+
+                   {/* Rubric Alignment Section */}
+                   <div className="space-y-4">
+                      <div className="flex items-center gap-2 px-1">
+                         <GraduationCap className="text-emerald-500" size={14} />
+                         <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-800">Instructional Rubric Mapping</h4>
+                      </div>
+                      <RubricCoverageDashboard groupId={group?._id || group?.id} />
+                   </div>
                 </div>
               )}
             </div>

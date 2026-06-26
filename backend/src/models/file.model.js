@@ -33,6 +33,10 @@ const fileSchema = new mongoose.Schema(
       description: String,
       linkedTasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
     },
+    rubricCriteria: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "RubricCriteria",
+    },
   },
   { timestamps: true },
 );

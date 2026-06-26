@@ -239,6 +239,16 @@ const fetchEvaluationsBySupervisor = async () => {
   return data;
 };
 
+const fetchProjectHealthForecast = async (groupId) => {
+  const { data } = await api.get(`/api/admin/analytics/groups/${groupId}/health-forecast`);
+  return data;
+};
+
+const fetchRubricAlignmentReport = async (groupId) => {
+  const { data } = await api.get(`/api/rubrics/alignment/${groupId}`);
+  return data;
+};
+
 export default {
   fetchAnalytics,
   fetchAtRiskGroups,
@@ -284,4 +294,6 @@ export default {
   runSystemAudit,
   fetchSignals,
   resolveSignal,
+  fetchProjectHealthForecast,
+  fetchRubricAlignmentReport,
 };

@@ -18,7 +18,7 @@ import {
 } from "../slices/studentSlice.js";
 import getErrorMessage from "../../../utils/error.js";
 import { showError, showSuccess } from "../../../components/ui/toast.jsx";
-import { FiMail, FiSend, FiGlobe, FiUsers, FiLock } from "react-icons/fi";
+import { FiMail, FiSend, FiGlobe, FiUsers, FiLock, FiDatabase } from "react-icons/fi";
 import StudentPageHeader from "../components/shared/StudentPageHeader.jsx";
 import CreateGroupPanel from "../components/groups/CreateGroupPanel.jsx";
 import MyGroupPanel from "../components/groups/MyGroupPanel.jsx";
@@ -30,6 +30,8 @@ import SupervisorRequestPanel from "../components/groups/SupervisorRequestPanel.
 import GroupIntelligencePanel from "../components/groups/GroupIntelligencePanel.jsx";
 import StatsCards from "../../admin/components/StatsCards.jsx";
 import studentApi from "../api/studentApi.js";
+import HealthForecastingHub from "../../admin/components/analytics/HealthForecastingHub.jsx";
+import RubricCoverageDashboard from "../../admin/components/analytics/RubricCoverageDashboard.jsx";
 import "../studentTheme.css";
 
 const StudentGroupsPage = () => {
@@ -113,6 +115,41 @@ const StudentGroupsPage = () => {
         )}
 
         <div className=" space-y-6">
+          {/* Layer 2.5: Strategic Intelligence Hubs */}
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <div className="space-y-3">
+               <div className="flex items-center gap-2 mb-2">
+                 <div className="h-4 w-1 bg-cyan-500 rounded-full" />
+                 <h2 className="text-[11px] font-black text-slate-800 uppercase tracking-widest">
+                   Health Forecasting
+                 </h2>
+               </div>
+               <HealthForecastingHub 
+                  groupId={myGroup?._id} 
+                  groupName={myGroup?.name} 
+                  fetcher={studentApi.fetchProjectHealthForecast}
+               />
+            </div>
+            
+            <div className="space-y-3">
+               <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <div className="h-4 w-1 bg-emerald-500 rounded-full" />
+                    <h2 className="text-[11px] font-black text-slate-800 uppercase tracking-widest">
+                      Academic Alignment
+                    </h2>
+                  </div>
+                  <div className="flex items-center gap-1.5 px-2 py-1 bg-emerald-50 rounded-md border border-emerald-100">
+                    <FiDatabase size={10} className="text-emerald-600" />
+                    <span className="text-[8px] font-black uppercase text-emerald-700 tracking-widest">Rubric Compliance</span>
+                  </div>
+               </div>
+               <div className="bg-slate-50 p-4 rounded-[2rem] border border-slate-100/50 shadow-inner h-full flex flex-col">
+                 <RubricCoverageDashboard groupId={myGroup?._id} />
+               </div>
+            </div>
+          </div>
+          
           {/* Synergy Core & Recruitment Layer */}
           <div className="grid gap-4 xl:grid-cols-[1.4fr_1fr]">
             <MyGroupPanel

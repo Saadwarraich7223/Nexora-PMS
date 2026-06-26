@@ -5,6 +5,7 @@ import Task from "../../models/task.model.js";
 import Deadline from "../../models/deadline.model.js";
 import ApiError from "../../utils/apiError.js";
 import { logger } from '../../utils/logger.js';
+import intelligenceService from "../../services/intelligence.service.js";
 
 
 const generateTaskBreakdown = asyncHandler(async (req, res) => {
@@ -210,9 +211,23 @@ const getTeamBalance = asyncHandler(async (req, res) => {
   });
 });
 
+const getProjectHealthForecast = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+  const group = await Group.findOne({ "members.user": userId });
+  if (!group) throw new ApiError(404, "Group not found for this student");
+
+  const forecast = await intelligenceService.getProjectHealthForecast(group._id);
+  
+  res.json({
+    message: "Project health forecast generated successfully",
+    ...forecast
+  });
+});
+
 export {
   generateTaskBreakdown,
   summarizeMeeting,
   getPrioritizedTasks,
   getTeamBalance,
+  getProjectHealthForecast
 };

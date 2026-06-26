@@ -404,6 +404,8 @@ export default {
       .get(`/api/student/projects/${projectId}/milestones`)
       .then((r) => r.data),
   fetchRubricCriteria: () =>
-    api.get("/api/student/projects/rubric-criteria").then((r) => r.data),
+    api.get("/api/rubrics/criteria").then((r) => r.data),
+  fetchProjectHealthForecast: () =>
+    api.get("/api/student/ai/health-forecast").then((r) => r.data),
   apiClient: api,
 };

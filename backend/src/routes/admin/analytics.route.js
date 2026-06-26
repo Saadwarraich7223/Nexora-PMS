@@ -7,6 +7,7 @@ import {
   runSystemAudit,
   getSignals,
   resolveSignal,
+  getGroupHealthForecast,
 } from "../../controllers/admin/analytics.controller.js";
 import express from "express";
 const router = express.Router();
@@ -19,5 +20,6 @@ router.post("/at-risk/:groupId/warn", warnGroup);
 router.post("/run-audit", runSystemAudit);
 router.get("/signals", getSignals);
 router.patch("/signals/:signalId/resolve", resolveSignal);
+router.get("/groups/:groupId/health-forecast", getGroupHealthForecast);
 
 export default router;

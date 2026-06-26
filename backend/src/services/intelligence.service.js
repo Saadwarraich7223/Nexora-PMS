@@ -7,6 +7,8 @@ import Evaluation from "../models/evaluation.model.js";
 import Deadline from "../models/deadline.model.js";
 import Notification from "../models/notification.model.js";
 import { logger } from "../utils/logger.js";
+import healthForecastService from "./projects/healthForecast.service.js";
+import { analyzeProjectHealthAI } from "./ai.service.js";
 
 /**
  * Gather system-wide context for Admin AI
@@ -26,13 +28,18 @@ const getSystemWideContext = async () => {
       .populate("members.user", "name email")
       .lean();
 
-    const groupsSummary = activeGroups.map(g => ({
-      name: g.name,
-      department: g.department,
-      project: g.project?.title || "No Project",
-      health: g.project?.healthReport?.status || "Unknown",
-      supervisor: g.supervisor?.name || "Unassigned",
-      members: g.members.map(m => m.user?.name).filter(Boolean)
+    const groupsSummary = await Promise.all(activeGroups.map(async (g) => {
+      const healthData = await healthForecastService.calculateGroupHealth(g._id);
+      return {
+        name: g.name,
+        department: g.department,
+        project: g.project?.title || "No Project",
+        health: healthData.status,
+        healthScore: healthData.healthScore,
+        lastUpdated: healthData.stamp,
+        supervisor: g.supervisor?.name || "Unassigned",
+        members: g.members.map(m => m.user?.name).filter(Boolean)
+      };
     }));
 
     const teachers = await User.find({ role: "teacher" }).lean();
@@ -120,11 +127,15 @@ const getTeacherContext = async (teacherId) => {
         date: { $gte: new Date() }
       }).sort({ date: 1 }).limit(5).lean();
 
+      const healthData = await healthForecastService.calculateGroupHealth(g._id);
+
       return {
         name: g.name,
         project: g.project?.title,
         projectDescription: g.project?.description,
-        health: g.project?.healthReport?.status || "Unknown",
+        health: healthData.status,
+        healthScore: healthData.healthScore,
+        healthBreakdown: healthData.breakdown,
         members: g.members.map(m => m.user?.name).filter(Boolean),
         memberTaskBreakdown: memberTaskMap,
         groupTaskStats: groupStats,
@@ -213,10 +224,16 @@ const getStudentContext = async (userId) => {
       isRead: false
     }).sort({ createdAt: -1 }).limit(15).lean();
 
+    // Health Forecast
+    const healthData = await healthForecastService.calculateGroupHealth(group._id);
+
     return {
       studentName: student.name,
       groupName: group.name,
       projectTitle: group.project?.title,
+      health: healthData.status,
+      healthScore: healthData.healthScore,
+      healthBreakdown: healthData.breakdown,
       supervisor: group.supervisor?.name,
       teamMembers: group.members.map(m => m.user?.name).filter(Boolean),
       myTasks: myTasks.map(t => ({ title: t.title, status: t.status, deadline: t.deadline })),
@@ -251,10 +268,38 @@ const getStudentContext = async (userId) => {
   }
 };
 
+/**
+ * Generate a predictive health forecast for a group.
+ */
+const getProjectHealthForecast = async (groupId) => {
+  try {
+    const rawMetrics = await healthForecastService.calculateGroupHealth(groupId);
+    
+    // AI Synthesis for Tactical Insight
+    // We only call AI if raw score is below Stellar (80), to save tokens/time
+    // or we can call it always for high-fidelity. Let's do always for "Premium" feel.
+    const aiInsight = await analyzeProjectHealthAI(rawMetrics.breakdown);
+
+    return {
+      ...rawMetrics,
+      aiInsight: {
+        summary: aiInsight.summary,
+        riskAlerts: aiInsight.riskAlerts,
+        predictedCompletionDate: aiInsight.predictedCompletionDate,
+        recommendation: aiInsight.recommendation
+      }
+    };
+  } catch (error) {
+    logger.error(`Error generating health forecast for ${groupId}:`, error);
+    return null;
+  }
+};
+
 const intelligenceService = {
   getSystemWideContext,
   getTeacherContext,
   getStudentContext,
+  getProjectHealthForecast
 };
 
 export default intelligenceService;

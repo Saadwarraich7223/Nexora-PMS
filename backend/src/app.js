@@ -24,6 +24,7 @@ import notificationRoutes from "./routes/notification.route.js";
 import userRoutes from "./routes/user.route.js";
 import webhookRoutes from "./routes/webhook.route.js";
 import chatRoutes from "./routes/chat.route.js";
+import rubricRoutes from "./routes/admin/rubric.route.js";
 
 // Create the Express app instance used by the HTTP server.
 const app = express();
@@ -72,6 +73,7 @@ app.use("/api/notifications", notificationRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/webhooks", webhookRoutes);
 app.use("/api/chat", chatRoutes);
+app.use("/api/rubrics", rubricRoutes);
 
 // 404 handler for unknown routes.
 app.use(notFoundMiddleware);
